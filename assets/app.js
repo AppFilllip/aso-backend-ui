@@ -68,6 +68,10 @@ document.getElementById("analyzeBtn").onclick = async () => {
     });
     const compData = await compRes.json();
     const competitors = compData.competitors || [];
+    if (competitors.length === 0) {
+      competitorBox.innerHTML = "<p>❌ No competitors found. Try another app.</p>";
+      return;
+    }
     competitorBox.innerHTML = "<h3>🧠 Select Competitors</h3>" +
       competitors.map(c => `
         <div class="competitor-card" onclick="toggleCompetitor('${c.id}', this)">
