@@ -9,6 +9,14 @@ root.innerHTML = `
       <option value="apple">Apple</option>
       <option value="google">Google</option>
     </select>
+    <select id="country" style="margin-left: 1rem;">
+      <option value="us">🇺🇸 US</option>
+      <option value="in">🇮🇳 India</option>
+      <option value="gb">🇬🇧 UK</option>
+      <option value="ca">🇨🇦 Canada</option>
+      <option value="de">🇩🇪 Germany</option>
+      <option value="fr">🇫🇷 France</option>
+    </select>
     <button id="analyzeBtn" style="margin-left: 1rem;">Analyze</button>
     <div id="result" style="margin-top: 2rem;"></div>
   </div>
@@ -17,13 +25,14 @@ root.innerHTML = `
 document.getElementById("analyzeBtn").onclick = async () => {
   const appId = document.getElementById("appId").value;
   const store = document.getElementById("store").value;
+  const country = document.getElementById("country").value;
   const resultBox = document.getElementById("result");
   resultBox.innerHTML = "⏳ Loading...";
 
   const res = await fetch("https://aso-ai-backend.onrender.com/analyze", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ app_id: appId, app_store: store })
+    body: JSON.stringify({ app_id: appId, app_store: store, country }),
   });
 
   const data = await res.json();
