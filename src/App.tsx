@@ -1,8 +1,14 @@
+import React, { useState } from "react";
+
 export default function App() {
+  const [message, setMessage] = useState("Welcome to ASO AI Agent!");
+
   return (
-    <div style={{ textAlign: "center", marginTop: 40 }}>
-      <h1>ASO AI Agent UI</h1>
-      <p>This is your React frontend. 🎉</p>
+    <div style={{ padding: "2rem", fontFamily: "sans-serif" }}>
+      <h1>{message}</h1>
+      <p>
+        Edit <code>src/App.tsx</code> to start building your ASO Agent UI!
+      </p>
     </div>
   );
 }
