@@ -1,19 +1,22 @@
+// ✅ STEP 2: Add Country Support to UI (React)
+// Update your src/App.tsx file with this full version
+
 import React, { useState } from "react";
 
 export default function App() {
   const [appId, setAppId] = useState("");
   const [store, setStore] = useState("apple");
+  const [country, setCountry] = useState("us");
   const [response, setResponse] = useState<any>(null);
 
   const handleAnalyze = async () => {
     const res = await fetch("https://aso-ai-backend.onrender.com/analyze", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         app_id: appId,
         app_store: store,
+        country: country, // ✅ Send country as part of request if needed later
       }),
     });
 
@@ -23,35 +26,4 @@ export default function App() {
 
   return (
     <div style={{ padding: "2rem", fontFamily: "Arial" }}>
-      <h1>🚀 ASO AI Agent</h1>
-
-      <input
-        style={{ marginRight: "1rem" }}
-        value={appId}
-        onChange={(e) => setAppId(e.target.value)}
-        placeholder="Enter App ID (e.g., com.spotify.music)"
-      />
-      <select value={store} onChange={(e) => setStore(e.target.value)}>
-        <option value="apple">Apple</option>
-        <option value="google">Google</option>
-      </select>
-
-      <button onClick={handleAnalyze} style={{ marginLeft: "1rem" }}>
-        Analyze
-      </button>
-
-      {response && (
-        <div style={{ marginTop: "2rem", padding: "1rem", background: "#f1f1f1" }}>
-          <h2>📱 App Info</h2>
-          <p><strong>App ID:</strong> {response.app_id}</p>
-          <p><strong>Store:</strong> {response.store}</p>
-          <p><strong>Title:</strong> {response.title}</p>
-          <p><strong>Developer:</strong> {response.developer}</p>
-          <p><strong>Rating:</strong> {response.rating}</p>
-          <p><strong>Description:</strong><br /> {response.description?.slice(0, 300)}...</p>
-          <img src={response.icon} alt="icon" style={{ marginTop: "1rem", width: 100 }} />
-        </div>
-      )}
-    </div>
-  );
-}
+      <h1>
